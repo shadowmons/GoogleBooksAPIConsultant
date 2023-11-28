@@ -1,41 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Google API Consultan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/styles/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
  
-<div class="container">
+<div class="container"> 
   <h2 class="cabecera">Google Books API use</h2>
   <p class="cabecera">First you have to generate an API key to use this web page, you can go to
     <a href="https://developers.google.com/books/docs/v1/using#APIKey">API key</a> to obtain your own key.
     <br>
     Once you do it, enter the key here and do the search.
-</p>
-  <div class="panel-group ">
-    <div class="panel panel-default ">
-      <div class="panel-heading">Panel Header</div>
-      <div class="panel-body">Panel la r4w</div>
+  </p>
+
+  <form action="/submit" method="POST">
+    <div class="form-group pb-2">
+      <label for="APIkey">API key</label>
+      <input type="text" class="form-control" id="APIkey" name="APIkey">
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">Panel Header</div>
-      <select class="form-select panel-body col-xs-12" >
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
+    <button type="submit" class="btn btn-dark mb-3">Submit</button>
+            
+  </form>
+
+  <div class="container APisearch" > 
+  <% if(locals.APIkey) {%>
+
+    <form >
+      <div class="form-group pb-4">
+        <label>API key registered</label>
+        <input type="text" class="form-control" name="APIkeyregistered" disabled 
+        placeholder=<%= APIkey %> >
+      </div>
+    </form>
+    <p>If you want to change the key, re-enter in the API key textbox.</p>
+    <p>Now do the search and select the options for searching the volume you desire.</p>
+
+    <form action="/search" method="POST">
+      
+      <div class="form-group pb-2">
+        <label for="volume">Keyword of the volume you want</label>
+        <input type="text" class="form-control" id="volume" name="volume">
+      </div>
+
+      <div class="form-group card">
+        <div class="card-header">
+          Look for keyword in:
+        </div>
+          <select class="form-select card-body col-xs-12" id="special" name="special">
+            <option selected>general</option>
+            <option value="intitle">intitle</option>
+            <option value="inauthor">inauthor</option>
+            <option value="inpublisher">inpublisher</option>
+            <option value="subject">subject</option>
+            <option value="isbn">isbn</option>
+            <option value="lccn">lccn</option>
+            <option value="oclc">oclc</option>
+          </select>
+      </div>
+
+      <div class="form-group card">
+        <div class="card-header">
+          Filter parameter to restrict the returned results 
+        </div>
+          <select class="form-select card-body col-xs-12" id="filter" name="filter">
+            <option selected>no filter</option>
+            <option value="partial">partial</option>
+            <option value="full">full</option>
+            <option value="free-ebooks">free-ebooks</option>
+            <option value="paid-ebooks">paid-ebooks</option>
+            <option value="ebooks">ebooks</option>
+          </select>
+      </div>
+
+      <div class="form-group card">
+        <div class="card-header">
+          printType parameter to restrict the returned results to a specific print or publication type 
+        </div>
+          <select class="form-select card-body col-xs-12" id="printType" name="printType">
+            <option selected>no filter</option>
+            <option value="all">all</option>
+            <option value="books">books</option>
+            <option value="3magazines">magazines</option>
+          </select>
+      </div>
+
+      <div class="form-group card">
+        <div class="card-header">
+          Change the sorting, default relevance
+        </div>
+          <select class="form-select card-body col-xs-12" id="sorting" name="sorting">
+            <option selected>relevance</option>
+            <option value="newest">newest</option>
+          </select>
+      </div>
+
+      <button type="search" class="btn btn-dark mb-3">Search</button>
+              
+    </form>
+  <%  }%>
 </div>
 
 
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 my-5 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Victor Gil</p>
+
+  </footer>
+</div>
 
 </body>
+  
 </html>
