@@ -48,10 +48,10 @@
 
       <div class="form-group card">
         <div class="card-header">
-          Look for keyword in:
+          Look for keyword in particular fields:
         </div>
           <select class="form-select card-body col-xs-12" id="special" name="special">
-            <option selected>general</option>
+            <option selected>No keyword</option>
             <option value="intitle">intitle</option>
             <option value="inauthor">inauthor</option>
             <option value="inpublisher">inpublisher</option>
@@ -60,6 +60,7 @@
             <option value="lccn">lccn</option>
             <option value="oclc">oclc</option>
           </select>
+          <input type="text" class="form-control card-body" id="keyword" name="keyword">
       </div>
 
       <div class="form-group card">
@@ -84,7 +85,7 @@
             <option selected>no filter</option>
             <option value="all">all</option>
             <option value="books">books</option>
-            <option value="3magazines">magazines</option>
+            <option value="magazines">magazines</option>
           </select>
       </div>
 
@@ -93,7 +94,8 @@
           Change the sorting, default relevance
         </div>
           <select class="form-select card-body col-xs-12" id="sorting" name="sorting">
-            <option selected>relevance</option>
+            <option selected>No defined</option>
+            <option value="relevance">relevance</option>
             <option value="newest">newest</option>
           </select>
       </div>
@@ -101,7 +103,19 @@
       <button type="search" class="btn btn-dark mb-3">Search</button>
               
     </form>
+
+    <div class="form-group">
+      <label for="textResults">Results</label>
+      <textarea class="form-control" id="textResults" rows="8">
+        <% if(locals.results) {%>
+          <%=results%>
+        <%}%>
+
+
+      </textarea>
+    </div>
   <%  }%>
+
 </div>
 
 
