@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
-let APIkey= "ede";
+let APIkey;
 const URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 
@@ -48,10 +48,10 @@ app.post("/submit", (req, res) => {
       const result = await axios.get(URLsearch);
       const data = result.data;
       console.log(data);
-      res.render("index.ejs", res.locals={APIkey:APIkey,results: JSON.stringify(data) });
+      res.render("index.ejs", res.locals={APIkey:APIkey,results: data });
       console.log("se logro")
     } catch (error) {
-      res.render("index.ejs", { APIkey:APIkey, results: JSON.stringify(error.response.data) });
+      res.render("index.ejs", { APIkey:APIkey, error: error.response.data });
     }
     });
 

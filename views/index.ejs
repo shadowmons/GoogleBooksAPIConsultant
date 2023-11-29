@@ -108,8 +108,32 @@
       <label for="textResults">Results</label>
       <textarea class="form-control" id="textResults" rows="8">
         <% if(locals.results) {%>
-          <%=results%>
+          Total results: <%= results.totalItems %>
+          <% if(results.totalItems > 0) {%>
+            <%results.items.forEach(i => { %>
+              Title: <%= i.volumeInfo.title %>
+              Authors: <%= i.volumeInfo.authors %>
+              Publisher: <%= i.volumeInfo.publisher %>
+              Published Date: <%= i.volumeInfo.publishedDate %>
+              PageCount: <%= i.volumeInfo.pageCount %>
+              Print Type: <%= i.volumeInfo.printType %>
+              Language: <%= i.volumeInfo.language %>
+              Country: <%= i.saleInfo.country %>
+              Is Ebook: <%= i.saleInfo.isEbook %>
+              Saleability: <%= i.saleInfo.saleability %>              
+              Description: <%= i.volumeInfo.description %>
+              <%});%>
+
+              <%}%>
+
+
         <%}%>
+
+        <% if(locals.error) {%>
+          Code: <%= error.error.code%>
+          Error: <%= error.error.message%>
+
+          <%}%>
 
 
       </textarea>
